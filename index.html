@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sebastian Arrian Mikael - Personal Website</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-yellow: #FFD700;
+            --light-yellow: #FFF9C4;
+            --pale-yellow: #FFFDE7;
+            --accent-color: #FFA000;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --background: #121212;
+            --card-bg: #1e1e1e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #aaaaaa;
+            --border-color: #333;
+        }
+        
+        [data-theme="light"] {
+            --background: #FFFDE7;
+            --card-bg: #FFFFFF;
+            --text-dark: #333;
+            --text-light: #666;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: #ddd;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-yellow);
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary-yellow);
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background-color: var(--accent-color);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        
+        [data-theme="light"] header {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-yellow);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-yellow);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-yellow);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Theme toggle button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: 20px;
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+        
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        [data-theme="light"] #hero {
+            background: linear-gradient(135deg, var(--light-yellow) 0%, var(--pale-yellow) 100%);
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+        
+        .hero-content h1 {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .hero-btn {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            max-width: 500px;
+            opacity: 0;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        /* About Section */
+        #about {
+            background-color: var(--card-bg);
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateX(-50px);
+            border: 2px solid var(--border-color);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        
+        .info-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        [data-theme="light"] .info-item {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+        
+        .info-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+        
+        [data-theme="light"] .info-item:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+        }
+        
+        .info-label {
+            font-weight: 600;
+            min-width: 150px;
+            color: var(--primary-yellow);
+        }
+        
+        .info-value {
+            color: var(--text-secondary);
+        }
+        
+        /* Education Section */
+        #education {
+            background: linear-gradient(135deg, var(--background) 0%, #1a1a1a 100%);
+        }
+        
+        [data-theme="light"] #education {
+            background: linear-gradient(135deg, var(--light-yellow) 0%, #f5f5f5 100%);
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        .timeline {
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-yellow), var(--accent-color));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateX(-50px);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: var(--transition);
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(-50px) translateZ(20px) scale(1.02);
+            z-index: 2;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(50px);
+        }
+        
+        .timeline-item:hover:nth-child(even) {
+            transform: translateX(50px) translateZ(20px) scale(1.02);
+            z-index: 2;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--primary-yellow);
+            top: 28px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: var(--transition);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .timeline-item:hover::after {
+            background-color: var(--primary-yellow);
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -12px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        
+        .timeline-content:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .timeline-date {
+            color: var(--primary-yellow);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        /* Skills Section */
+        #skills {
+            background-color: var(--card-bg);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: var(--primary-yellow);
+        }
+        
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+        }
+        
+        .skill-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        /* Hobby Section */
+        #hobbies {
+            background: linear-gradient(135deg, var(--background) 0%, #1a1a1a 100%);
+        }
+        
+        [data-theme="light"] #hobbies {
+            background: linear-gradient(135deg, var(--light-yellow) 0%, #f5f5f5 100%);
+        }
+        
+        .hobbies-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .hobby-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 320px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid var(--border-color);
+        }
+        
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hobby-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .hobby-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .hobby-card:hover .hobby-image img {
+            transform: scale(1.1);
+        }
+        
+        .hobby-content {
+            padding: 25px;
+        }
+        
+        .hobby-content h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Dream Job Section */
+        #dream {
+            background-color: var(--card-bg);
+        }
+        
+        .dream-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgba(255, 215, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        [data-theme="light"] .dream-container {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+        
+        .dream-icon {
+            font-size: 4.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            color: var(--white);
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        [data-theme="light"] footer {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #aaa;
+            margin-bottom: 12px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        [data-theme="light"] .footer-column p, [data-theme="light"] .footer-column a {
+            color: #555;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary-yellow);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+        
+        [data-theme="light"] .social-links a {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-yellow);
+            transform: translateY(-3px);
+            color: var(--text-dark);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        [data-theme="light"] .copyright {
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-up {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        /* Floating elements */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Mode toggle button */
+        .mode-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-yellow);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .mode-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-image, .about-content {
+                width: 100%;
+                transform: none !important;
+            }
+            
+            .about-image {
+                margin-bottom: 40px;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+                transform: none;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+                right: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+            
+            .hero-image {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 80%;
+                margin: 40px auto 0;
+            }
+            
+            .mode-toggle {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Sebastian</div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#hobbies">Hobbies</a></li>
+                    <li><a href="#dream">Dream</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hey! I'm Sebastian</h1>
+                <p>A Grade 9 student at John Paul School who loves tech, science, and just figuring out how things work. This is my little space on the internet where I share what I'm up to and what I'm learning.</p>
+                <a href="#about" class="btn hero-btn">Check Me Out</a>
+            
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="sebastian1.jpg" alt="Sebastian Arrian Mikael">
+                </div>
+                <div class="about-content">
+                    <p>What's up! I'm Sebastian Arrian Mikael, but most people just call me Sebastian. I'm currently in Grade 9 at John Paul School, and honestly, school's been pretty cool so far. I'm into all sorts of stuff, but I especially love anything that has to do with technology and science.</p>
+                    <p>I'm always trying to learn new things, whether it's in class or on my own time. There's just so much to explore, you know? I've been getting into coding lately, and it's actually way more fun than I thought it would be. I also love doing science experiments and figuring out how different things work.</p>
+                    
+                    <div class="info-item">
+                        <span class="info-label">Full Name:</span>
+                        <span class="info-value">Sebastian Arrian Mikael</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Nickname:</span>
+                        <span class="info-value">Sebastian</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Current School:</span>
+                        <span class="info-value">John Paul School</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Grade 9:</span>
+                        <span class="info-value">2025 - Present</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Previous School:</span>
+                        <span class="info-value">Wellington Intelligence School</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location:</span>
+                        <span class="info-value">Bekasi, Indonesia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2>My School Journey</h2>
+            <div class="timeline-container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2025 - Present</div>
+                            <h3 class="timeline-title">Grade 9 at John Paul School</h3>
+                            <p>At the moment, I'm just starting Grade 9. I am going all in my grades, and I started practicing more IGCSE test questions and advanced mathematics for my competitions. I'm also starting a tutor organization that is meant to help teach students who are struggling and need support for academics for free. I've focused more onto coding and physics.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2024 - 2025</div>
+                            <h3 class="timeline-title">Grade 8 at John Paul School</h3>
+                            <p>During this time, I finally had friends and understood how the system worked, I focused more in my academics because it was getting closer to secondary 3 and understanding IGCSEs was required. This was also the time I discovered coding and loved ICT.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2023 - 2024</div>
+                            <h3 class="timeline-title">Grade 7 at John Paul School</h3>
+                            <p>The year I moved to a new school and started adapting to a new learning environment, both academically and socially. I got heavily interested into logic-based subjects, mainly Math and Physics. I started learning more into how things worked around us and understand how daily items work with it.</p>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>What I'm Good At</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Math Skills</h3>
+                    <p>I'm pretty good at math, especially algebra and geometry. I like solving puzzles and figuring out complex problems. My teacher says I have a logical way of thinking that helps me break down tough questions.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="skill-title">Tech & Coding</h3>
+                    <p>I've been learning the basics of programming and love building simple apps and games. I'm currently working on understanding how websites are made and might try creating my own someday!</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔬</div>
+                    <h3 class="skill-title">Science Experiments</h3>
+                    <p>I enjoy doing science experiments and understanding how things work in the real world. Whether it's chemistry reactions or physics principles, I love seeing science in action.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🏆</div>
+                    <h3 class="skill-title">School Competitions</h3>
+                    <p>I've participated in several school competitions like math olympiads and science fairs. It's always exciting to test my knowledge against other students and learn from the experience.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📚</div>
+                    <h3 class="skill-title">Learning New Stuff</h3>
+                    <p>One of my best skills is being curious and wanting to learn new things. Whether it's through books, videos, or just asking questions, I'm always trying to expand what I know.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3 class="skill-title">Problem Solving</h3>
+                    <p>I love tackling challenges and finding creative solutions. Whether it's a tough math problem or a coding bug, I enjoy the process of figuring things out step by step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies">
+        <div class="container">
+            <h2>My Hobbies</h2>
+            <div class="hobbies-container">
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="badminton.jpg" alt="Badminton">
+                    </div>
+                    <div class="hobby-content">
+                        <h3>Badminton</h3>
+                        <p>I love playing badminton with my friends after school. It's not just fun, but also keeps me active and healthy. I've been playing for a few years now and have improved a lot. There's something really satisfying about a well-placed smash!</p>
+                    </div>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-image">
+                        <img src="singing1.jpg" alt="Singing">
+                    </div>
+                    <div class="hobby-content">
+                        <h3>Singing</h3>
+                        <p>Singing is one of my favorite ways to relax and express myself. I enjoy listening to different music genres and trying to sing along. Sometimes I even record myself to see how I can improve. Music has a way of lifting my mood instantly!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dream Job Section -->
+    <section id="dream">
+        <div class="container">
+            <h2>My Dream Job</h2>
+            <div class="dream-container">
+                <div class="dream-icon">🤖</div>
+                <h3>Machine Learning Engineer</h3>
+                <p>I'm really fascinated by artificial intelligence and how machines can learn from data. My dream is to become a Machine Learning Engineer, creating smart systems that can help solve real-world problems. I want to work on projects that make a positive impact, like improving healthcare, education, or environmental protection.</p>
+                <p>To get there, I'm focusing on building strong foundations in math, computer science, and problem-solving skills. I'm excited about the future and all the possibilities that technology can offer!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sebastian Arrian Mikael</h3>
+                    <p>A Grade 9 student at John Paul School in Bekasi, Indonesia. Always learning, always curious about how things work.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/6282113832886" target="_blank">💬</a>
+                        <a href="mailto:sebastianarrianm@gmail.com" target="_blank">✉️</a>
+                        <a href="https://www.instagram.com" target="_blank">📷</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Me</h3>
+                    <a href="mailto:sebastianarrianm@gmail.com" class="contact-link">📧 sebastianarrianm@gmail.com</a>
+                    <a href="https://wa.me/6282113832886" class="contact-link" target="_blank">📱 +62 821-1383-2886 (WhatsApp)</a>
+                    <p>School: John Paul School</p>
+                    <p>Location: Bekasi, Indonesia</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="#hero">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#education">Education</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#hobbies">Hobbies</a>
+                    <a href="#dream">Dream Job</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Sebastian Arrian Mikael. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <button class="mode-toggle" id="modeToggle">🌙</button>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default to dark mode
+            document.body.setAttribute('data-theme', 'dark');
+            
+            // Hero section animations
+            setTimeout(() => {
+                document.querySelector('.hero-content h1').classList.add('fade-up');
+                setTimeout(() => {
+                    document.querySelector('.hero-content p').classList.add('fade-up');
+                    setTimeout(() => {
+                        document.querySelector('.hero-btn').classList.add('fade-up');
+                    }, 200);
+                }, 300);
+            }, 500);
+            
+            setTimeout(() => {
+                document.querySelector('.hero-image').classList.add('fade-in', 'floating');
+            }, 1000);
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('about-image') || 
+                            entry.target.classList.contains('about-content')) {
+                            entry.target.classList.add('fade-in');
+                        } else if (entry.target.classList.contains('timeline-item')) {
+                            entry.target.classList.add('fade-in');
+                        } else if (entry.target.classList.contains('skill-card') || 
+                                   entry.target.classList.contains('hobby-card') ||
+                                   entry.target.classList.contains('dream-container')) {
+                            entry.target.classList.add('fade-up');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements
+            document.querySelectorAll('.about-image, .about-content, .timeline-item, .skill-card, .hobby-card, .dream-container').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+                } else {
+                    header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+                }
+            });
+
+            // Interactive timeline
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = this.style.transform.includes('translateX(50px)') ? 
+                        'translateX(50px) translateZ(20px) scale(1.02)' : 
+                        'translateX(-50px) translateZ(20px) scale(1.02)';
+                    this.style.zIndex = '2';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = this.style.transform.includes('translateX(50px)') ? 
+                        'translateX(50px)' : 'translateX(-50px)';
+                    this.style.zIndex = '1';
+                });
+            });
+
+            // About image click effect
+            const aboutImage = document.querySelector('.about-image img');
+            aboutImage.addEventListener('click', function() {
+                alert('That\'s me! I love learning and exploring new things.');
+            });
+
+            // Dark/Light mode toggle
+            const modeToggle = document.getElementById('modeToggle');
+            
+            // Check user preference
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            document.body.setAttribute('data-theme', currentTheme);
+            modeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+            
+            modeToggle.addEventListener('click', function() {
+                const currentMode = document.body.getAttribute('data-theme');
+                const newMode = currentMode === 'dark' ? 'light' : 'dark';
+                
+                document.body.setAttribute('data-theme', newMode);
+                localStorage.setItem('theme', newMode);
+                
+                // Update button icon
+                this.textContent = newMode === 'dark' ? '☀️' : '🌙';
+                
+                // Add animation effect
+                this.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
